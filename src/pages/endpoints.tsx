@@ -50,7 +50,7 @@ export default function Endpoints() {
           <CodeExample language="bash" code="GET /api/archimonstres/etape/20" />
         </Box>
       </Box>
-      <Box marginBottom={8}>
+      <Box marginBottom={16}>
         <Heading as="h2" marginBottom="4">
           GET /api/archimonstres/nom/:name
         </Heading>
@@ -65,6 +65,42 @@ export default function Endpoints() {
           <CodeExample
             language="bash"
             code="GET /api/archimonstres/nom/Arachi"
+          />
+        </Box>
+      </Box>
+      <Box marginBottom={16}>
+        <Heading as="h2" marginBottom="4">
+          GET /api/archimonstres/zone/:zone
+        </Heading>
+        <Text maxW="4xl" marginBottom={4}>
+          Cet endpoint permet de rechercher des archimonstres par leur zone.
+          L'utilisateur doit fournir le nom de la zone dans l'URL de la requête.
+          L'API renverra les archimonstres correspondants, même si le nom fourni
+          est partiel.
+        </Text>
+        <Box marginBottom={8}>
+          <Text marginBottom={4}>Exemple de requête :</Text>
+          <CodeExample
+            language="bash"
+            code="GET /api/archimonstres/zone/Amakna"
+          />
+        </Box>
+      </Box>
+      <Box marginBottom={16}>
+        <Heading as="h2" marginBottom="4">
+          GET /api/archimonstres/sous-zone/:sousZone
+        </Heading>
+        <Text maxW="4xl" marginBottom={4}>
+          Cet endpoint permet de rechercher des archimonstres par leur
+          sous-zone. L'utilisateur doit fournir le nom de la sous-zone dans
+          l'URL de la requête. L'API renverra les archimonstres correspondants,
+          même si le nom fourni est partiel.
+        </Text>
+        <Box marginBottom={8}>
+          <Text marginBottom={4}>Exemple de requête :</Text>
+          <CodeExample
+            language="bash"
+            code="GET /api/archimonstres/sous-zone/Feudala"
           />
         </Box>
       </Box>
