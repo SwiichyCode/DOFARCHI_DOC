@@ -43,9 +43,6 @@ export default function Aside() {
           <AccordionPanel pb={2}>
             <Link href="/endpoints">- Endpoints</Link>
           </AccordionPanel>
-          <AccordionPanel pb={2}>
-            <Link href="/introduction">- Codes d'erreur</Link>
-          </AccordionPanel>
         </AccordionItem>
       </Accordion>
     </aside>
