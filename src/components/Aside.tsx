@@ -41,6 +41,9 @@ export default function Aside() {
             <AccordionIcon />
           </Box>
           <AccordionPanel pb={2}>
+            <Link href="/tokenAccess">- Token d'autorisation</Link>
+          </AccordionPanel>
+          <AccordionPanel pb={2}>
             <Link href="/endpoints">- Endpoints</Link>
           </AccordionPanel>
         </AccordionItem>

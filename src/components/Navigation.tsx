@@ -1,12 +1,11 @@
 import { FiGithub } from "react-icons/fi";
 import { FaMoon } from "react-icons/fa";
 import { Button } from "@chakra-ui/react";
-import { RegisterModal } from "./RegisterModal";
 import { useDisclosure } from "@chakra-ui/react";
-import { LoginModal } from "./LoginModal";
-import { useEffect, useState } from "react";
-import AuthService from "@/services/auth.services";
+import AuthService from "@/services/auth/auth.services";
+import AuthForm from "../services/auth/AuthForm";
 import useAuthValidation from "@/hooks/useAuthValidation";
+import Link from "next/link";
 
 export default function Navigation() {
   const {
@@ -36,25 +35,30 @@ export default function Navigation() {
         <a href="https://www.buymeacoffee.com/">Donation</a>
       </Button>
 
-      {!user && (
+      {!user ? (
         <>
           <Button onClick={() => onOpenLoginModal()}>Connexion</Button>
           <Button onClick={() => onOpenRegisterModal()}>Inscription</Button>
         </>
-      )}
-
-      {user && (
+      ) : (
         <>
-          <Button>Mon profil</Button>
+          <Button>
+            <Link href="/profil">Mon profil</Link>
+          </Button>
           <Button onClick={() => handleLogout()}>Déconnexion</Button>
         </>
       )}
 
-      <RegisterModal
+      <AuthForm
         isOpen={isOpenRegisterModal}
         onClose={onCloseRegisterModal}
+        type={"register"}
       />
-      <LoginModal isOpen={isOpenLoginModal} onClose={onCloseLoginModal} />
+      <AuthForm
+        isOpen={isOpenLoginModal}
+        onClose={onCloseLoginModal}
+        type={"login"}
+      />
     </nav>
   );
 }

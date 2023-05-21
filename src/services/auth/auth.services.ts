@@ -1,7 +1,7 @@
 const API_URL = "http://localhost:3000/api/auth/";
 
-const register = (email: string, password: string) => {
-  fetch(API_URL + "register", {
+const register = async (email: string, password: string) => {
+  return fetch(API_URL + "register", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -13,8 +13,8 @@ const register = (email: string, password: string) => {
   });
 };
 
-const login = (email: string, password: string) => {
-  fetch(API_URL + "login", {
+const login = async (email: string, password: string) => {
+  return fetch(API_URL + "login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

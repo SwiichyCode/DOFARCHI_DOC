@@ -69,6 +69,7 @@ export default function CodeExample({
         </div>
       </div>
       <div className="body h-auto rounded-b-lg bg-[#000] px-2 py-4 overflow-hidden">
+        {children}
         <pre ref={bodyRef}>{formattedCode || code}</pre>
       </div>
     </div>

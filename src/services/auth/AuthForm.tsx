@@ -1,23 +1,21 @@
-import React, { useState } from "react";
 import {
   Modal,
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  ModalCloseButton,
   ModalBody,
   Input,
   InputGroup,
-  InputRightElement,
   Button,
   FormLabel,
 } from "@chakra-ui/react";
-import { useForm, Resolver } from "react-hook-form";
-import AuthService from "@/services/auth.services";
+import { useForm } from "react-hook-form";
+import AuthService from "@/services/auth/auth.services";
 
 interface RegisterModalProps {
   isOpen: boolean;
   onClose: () => void;
+  type: "login" | "register";
 }
 
 interface FormValues {
@@ -25,28 +23,42 @@ interface FormValues {
   password: string;
 }
 
-export const LoginModal = ({ isOpen, onClose }: RegisterModalProps) => {
+export default function AuthForm({
+  isOpen,
+  onClose,
+  type,
+}: RegisterModalProps) {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FormValues>();
+
   const onSubmit = handleSubmit(async (data) => {
-    await AuthService.login(data.email, data.password);
-
-    onClose();
-
-    setInterval(() => {
-      window.location.reload();
-    }, 1000);
+    try {
+      if (type === "login") {
+        await AuthService.login(data.email, data.password);
+        onClose();
+        window.location.reload();
+      } else {
+        await AuthService.register(data.email, data.password);
+        onClose();
+      }
+    } catch (error) {
+      console.log(error);
+    }
   });
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent padding={2}>
-        <ModalHeader>Se connecter</ModalHeader>
-        {/* <ModalCloseButton /> */}
+        {/* <ModalHeader>Se connecter</ModalHeader> */}
+        {type === "login" ? (
+          <ModalHeader>Se connecter</ModalHeader>
+        ) : (
+          <ModalHeader>S'inscrire</ModalHeader>
+        )}
         <ModalBody>
           <form onSubmit={onSubmit} className="flex flex-col gap-4">
             <InputGroup size="md" flex={"flex"} flexDirection={"column"}>
@@ -69,11 +81,11 @@ export const LoginModal = ({ isOpen, onClose }: RegisterModalProps) => {
               type="submit"
               marginTop={"2.5"}
             >
-              Submit
+              {type === "login" ? "Se connecter" : "S'inscrire"}
             </Button>
           </form>
         </ModalBody>
       </ModalContent>
     </Modal>
   );
-};
+}
