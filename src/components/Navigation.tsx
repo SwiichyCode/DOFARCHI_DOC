@@ -1,13 +1,14 @@
+import Link from "next/link";
 import { FiGithub } from "react-icons/fi";
 import { FaMoon } from "react-icons/fa";
 import { Button } from "@chakra-ui/react";
 import { useDisclosure } from "@chakra-ui/react";
-import AuthService from "@/services/auth/auth.services";
 import AuthForm from "../services/auth/AuthForm";
-import useAuthValidation from "@/hooks/useAuthValidation";
-import Link from "next/link";
+import useAuth from "@/hooks/useAuth";
 
 export default function Navigation() {
+  const { user, logout } = useAuth();
+
   const {
     isOpen: isOpenRegisterModal,
     onOpen: onOpenRegisterModal,
@@ -18,11 +19,9 @@ export default function Navigation() {
     onOpen: onOpenLoginModal,
     onClose: onCloseLoginModal,
   } = useDisclosure();
-  const { user, setUser } = useAuthValidation();
 
   const handleLogout = () => {
-    AuthService.logout();
-    setUser(false);
+    logout();
   };
 
   return (

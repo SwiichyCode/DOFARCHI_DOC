@@ -1,7 +1,7 @@
-const API_URL = "http://localhost:3000/api/token/";
+import API_URL from "@/constants/api_url";
 
 const createToken = async (userId: string) => {
-  return fetch(API_URL + "create", {
+  return fetch(API_URL.api_token + "create", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -13,7 +13,7 @@ const createToken = async (userId: string) => {
 };
 
 const getToken = async (userId: string) => {
-  return fetch(API_URL + "get", {
+  return fetch(API_URL.api_token + "get", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

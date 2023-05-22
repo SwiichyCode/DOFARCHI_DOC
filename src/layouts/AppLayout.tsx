@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import Header from "@/components/Header";
 import Aside from "@/components/Aside";
 import MainLayout from "./MainLayout";
+import useAuthValidation from "@/hooks/useAuth";
 
 interface AppLayoutProps {
   children: React.ReactNode;
@@ -14,8 +15,6 @@ const roboto = Roboto_Mono({ subsets: ["latin"] });
 export default function AppLayout({ children }: AppLayoutProps) {
   const router = useRouter();
   const { pathname } = router;
-
-  console.log(pathname);
 
   useEffect(() => {
     if (pathname === "/") {

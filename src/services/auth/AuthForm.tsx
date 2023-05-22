@@ -61,7 +61,12 @@ export default function AuthForm({
         )}
         <ModalBody>
           <form onSubmit={onSubmit} className="flex flex-col gap-4">
-            <InputGroup size="md" flex={"flex"} flexDirection={"column"}>
+            <InputGroup
+              size="md"
+              flex={"flex"}
+              flexDirection={"column"}
+              marginBottom={4}
+            >
               <FormLabel htmlFor="email">Email</FormLabel>
               <Input placeholder="Email" size="md" {...register("email")} />
             </InputGroup>
@@ -75,12 +80,7 @@ export default function AuthForm({
               />
             </InputGroup>
 
-            <Button
-              colorScheme="teal"
-              size="md"
-              type="submit"
-              marginTop={"2.5"}
-            >
+            <Button colorScheme="teal" size="md" type="submit" marginTop={4}>
               {type === "login" ? "Se connecter" : "S'inscrire"}
             </Button>
           </form>
