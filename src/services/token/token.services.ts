@@ -1,7 +1,12 @@
 import API_URL from "@/constants/api_url";
+const fromLocalHost = true;
+
+const api_url = fromLocalHost
+  ? "http://localhost:3000/api/token/"
+  : API_URL.api_token;
 
 const createToken = async (userId: string) => {
-  return fetch(API_URL.api_token + "create", {
+  return fetch(api_url + "create", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -13,7 +18,7 @@ const createToken = async (userId: string) => {
 };
 
 const getToken = async (userId: string) => {
-  return fetch(API_URL.api_token + "get", {
+  return fetch(api_url + "get", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

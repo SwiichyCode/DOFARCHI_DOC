@@ -1,8 +1,12 @@
-// const API_URL = "http://localhost:3000/api/auth/";
 import API_URL from "@/constants/api_url";
+const fromLocalHost = true;
+
+const api_url = fromLocalHost
+  ? "http://localhost:3000/api/auth/"
+  : API_URL.api_auth;
 
 const register = async (email: string, password: string) => {
-  return fetch(API_URL.api_auth + "register", {
+  return fetch(api_url + "register", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -15,7 +19,7 @@ const register = async (email: string, password: string) => {
 };
 
 const login = async (email: string, password: string) => {
-  return fetch(API_URL.api_auth + "login", {
+  return fetch(api_url + "login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

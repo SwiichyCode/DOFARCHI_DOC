@@ -1,10 +1,19 @@
 import React, { useEffect, useState } from "react";
 import TokenService from "@/services/token/token.services";
+import tokenRemainingTime from "@/utils/tokenRemainingTime";
 import { Button, Heading } from "@chakra-ui/react";
 import { Box, Text } from "@chakra-ui/react";
 
+interface TokenProps {
+  token: string;
+  tokenExpirationDate: string;
+}
+
 export default function Profil() {
-  const [token, setToken] = useState("");
+  const [tokenData, setTokenData] = useState<TokenProps>({
+    token: "",
+    tokenExpirationDate: "",
+  });
   const [userData, setUserData] = useState({} as any);
 
   const handleGenerateToken = async () => {
@@ -20,7 +29,7 @@ export default function Profil() {
     const userData = JSON.parse(getUserData as string);
 
     TokenService.getToken(userData.userId).then((res) =>
-      res.json().then((data) => setToken(data.token))
+      res.json().then((data) => setTokenData(data))
     );
 
     setUserData(userData);
@@ -35,12 +44,13 @@ export default function Profil() {
         Email: {userData.userEmail}
       </Text>
       <Text maxW={"4xl"} marginBottom={4}>
-        Token: {token}
+        Token: {tokenData.token}
+        Token expiration date: {tokenData.tokenExpirationDate}
+        Temps restant: {tokenRemainingTime(tokenData.tokenExpirationDate)} days
       </Text>
       <Button onClick={() => handleGenerateToken()}>
-        {token ? "Update Token" : "Generate token"}
+        {tokenData.token ? "Update Token" : "Generate token"}
       </Button>
-      {/* <p>{token}</p> */}
     </Box>
   );
 }
