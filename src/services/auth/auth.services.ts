@@ -1,40 +1,29 @@
+import axios from "axios";
 import API_URL from "@/constants/api_url";
-const fromLocalHost = true;
+const fromLocalHost = false;
 
 const api_url = fromLocalHost
   ? "http://localhost:3000/api/auth/"
   : API_URL.api_auth;
 
 const register = async (email: string, password: string) => {
-  return fetch(api_url + "register", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      email,
-      password,
-    }),
+  return axios.post(api_url + "register", {
+    email,
+    password,
   });
 };
 
 const login = async (email: string, password: string) => {
-  return fetch(api_url + "login", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
+  return axios
+    .post(api_url + "login", {
       email,
       password,
-    }),
-  })
-    .then((response) => response.json())
+    })
     .then((response) => {
-      if (response.accessToken) {
-        localStorage.setItem("user", JSON.stringify(response));
+      if (response.data.accessToken) {
+        localStorage.setItem("user", JSON.stringify(response.data));
       }
-      return response;
+      return response.data;
     });
 };
 

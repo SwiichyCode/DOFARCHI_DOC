@@ -29,7 +29,7 @@ export default function Profil() {
     const userData = JSON.parse(getUserData as string);
 
     TokenService.getToken(userData.userId).then((res) =>
-      res.json().then((data) => setTokenData(data))
+      setTokenData(res.data)
     );
 
     setUserData(userData);
